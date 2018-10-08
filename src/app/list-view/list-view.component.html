@@ -1,0 +1,39 @@
+<div class="container-section" *ngIf="!isProductView">
+  <div class="filter-section">
+    <app-filter-view (filterData)="filterChange($event)" [colorsData]="colorlist" [sizeData]="sizelist"></app-filter-view>
+  </div>
+  <div class="right-section">
+    <div class="row clr-margin">
+      <div align="center" class="col-md-4 item-view-details" (click)="selectedProduct(list)" *ngFor="let list of shirtDetails">
+        <div class="item-image">
+          <img src="{{list.picture}}" height="200" width="245" alt="{{list.name}}">
+        </div>
+        <div class="item-name">{{list.name}}</div>
+        <div class="item-price">
+          <span>Size : {{list.size}}</span>
+          <span>Colour : {{list.colour}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="product-details-container"  *ngIf="isProductView">
+  <div class="product-details">
+    <div class="item-image">
+      <img src="{{selectedProductDetails['picture']}}" height="250" width="250" alt="{{selectedProductDetails['name']}}">
+    </div>
+    <div  class="product-desc">
+      <div class="item-name">{{selectedProductDetails['name']}}</div>
+      <div>Price : <span>{{selectedProductDetails['price'] | currency:'USD'}}</span> </div>
+      <div>Colour : <span>{{selectedProductDetails['colour']}}</span> </div>
+      <div>Size : <span>{{selectedProductDetails['size']}}</span> </div>
+    </div>
+  </div>
+  <div class="btn-section">
+    <div class="btn primary" (click)="isProductView = false;isAddMore=false;">Back</div>
+    <div class="btn primary" (click)="addToCart()" >
+      <span *ngIf="!isAddMore">Add to Basket</span>
+      <span *ngIf="isAddMore">Add One More</span>
+    </div>
+  </div>
+</div>

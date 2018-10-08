@@ -1,0 +1,13 @@
+<h3>Filters</h3>
+
+<h6>Colour</h6>
+<div class="common-style" *ngFor="let item of colorsData">
+  <p-checkbox name="group1" (onChange)="getValues()" value="{{item}}" label="{{item}}" [(ngModel)]="selectedColor"></p-checkbox>
+</div>
+
+
+<h6>Size</h6>
+<div class="common-style" *ngFor="let item of sizeData">
+    <p-checkbox name="group2" (onChange)="getValues()" value="{{item}}" label="{{item}}" [(ngModel)]="selectedSize"></p-checkbox>
+  </div>
+

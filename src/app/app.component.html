@@ -1,0 +1,42 @@
+<div class="top-panel">
+    <h3>Welcome to Nordsense shirt store</h3>
+    <div (click)="mockShirtDetailsService.cartDetailsCount > 0?cartDetails():''" class="cart-section">
+        <i class=" fa fa-shopping-cart"></i>
+        <span *ngIf="mockShirtDetailsService.cartDetailsCount>0">{{mockShirtDetailsService.cartDetailsCount }}</span>
+    </div>
+
+</div>
+
+<app-list-view></app-list-view>
+
+<p-dialog class="dialog-header" header="Basket Details" [(visible)]="display" [modal]="true" [responsive]="true" [width]="800"
+    [minWidth]="200" [minY]="70" [maximizable]="false" [baseZIndex]="10000">
+    <div class="row product-details clr-margin"  *ngFor="let list of mockShirtDetailsService.cartDetails">
+        <div class="col-md-5" style="display:flex">
+            <img src="{{list.picture}}" height="50" width="50" alt="{{list.name}}">
+            <div class="model-details">
+                <div>{{list.name}}</div>
+                <div>{{list.size}} | {{list.colour}}</div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <input type="number" (input)="quantityChange(list)" [(ngModel)]="list.quantity">
+        </div>
+        <div class="col-md-3">
+            <span>{{list.price * list.quantity | currency:'USD' }}</span>
+        </div>
+        <div class="col-md-1">
+            <i (click)="removeItem(list)" style="cursor:pointer" class=" fa fa-times"></i>
+        </div>
+
+    </div>
+
+    <div class="footer-details">
+        <span>Total</span><span>{{mockShirtDetailsService.totalCount | currency:'USD' }}</span>
+    </div>
+
+
+</p-dialog>
+
+<!-- <ngx-spinner bdColor="" size="large" color="red" type="line-scale"></ngx-spinner> -->
